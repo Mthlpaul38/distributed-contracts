@@ -1,0 +1,38 @@
+rule Default {
+    description: "Allow all participants access to all resources"
+    participant: "ANY"
+    operation: ALL
+    resource: "org.acme.landregistry.*"
+    action: ALLOW
+}
+
+rule SystemACL {
+  description:  "System ACL to permit all access"
+  participant: "ANY"
+  operation: ALL
+  resource: "org.hyperledger.composer.system.**"
+  action: ALLOW
+}
+rule test {
+  description: "Allow"
+  participant: "org.acme.landregistry.PrivateIndividual"
+  operation: CREATE,DELETE
+  resource: "org.acme.landregistry.RealEstate"
+  action: DENY
+}
+
+rule r3 {
+	description: "update"
+  	participant(m): "org.acme.landregistry.*"
+	operation: UPDATE
+    resource(r): "org.acme.landregistry.RealEstate"
+    condition: (r.owner.getIdentifier() != m.getIdentifier())
+  	action:DENY
+}
+rule r4 {
+	description: "create"
+  	participant: "org.acme.landregistry.PrivateIndividual"
+	operation: CREATE,DELETE
+    resource: "org.acme.landregistry.*"
+  	action:DENY
+}
