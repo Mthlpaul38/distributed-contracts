@@ -8,32 +8,33 @@ participant PrivateIndividual identified by id {
   o String id
   o String name
   o String address
-  o Double balance default = 0.0
+  o String gender
+  o Double Contact_Number
+  o String email
 }
 
 participant Bank identified by id {
   o String id
   o String name
+  o String branch_id
   o Double balance default = 0.0
 }
 
-participant InsuranceCompany identified by id {
-  o String id
-  o String name
-  o Double balance default = 0.0
-}
   
 participant Notary identified by id {
   o String id
   o String name
   o String address
   o Double balance default = 0.0
+  o Integer pin
 }
 
 asset RealEstate identified by id {
   o String id
   o String address
-  o Double squareMeters
+  o Double Area
+  o Double Coordinate_one
+  o Double Coordinate_two
   o Double price
   --> PrivateIndividual owner
 }
@@ -48,14 +49,6 @@ asset Loan identified by id {
    o Integer durationInMonths
 }
   
-asset Insurance identified by id {
-  o String id
-  --> RealEstate realEstate
-  --> PrivateIndividual insured
-  --> InsuranceCompany insuranceCompany
-  o Double monthlyCost
-  o Integer durationInMonths
-}
 
 transaction BuyingRealEstate {
   --> PrivateIndividual buyer
@@ -63,15 +56,6 @@ transaction BuyingRealEstate {
   --> RealEstate realEstate
   --> Loan loan
   --> Notary notary
-  --> Insurance insurance
-}
-  
-transaction ContractingInsurance {
-  --> PrivateIndividual insured
-  --> InsuranceCompany insuranceCompany
-  --> RealEstate realEstate
-  o Double monthlyCost
-  o Integer durationInMonths
 }
   
 transaction ContractingLoan {
