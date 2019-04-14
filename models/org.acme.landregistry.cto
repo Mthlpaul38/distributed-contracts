@@ -11,14 +11,9 @@ participant PrivateIndividual identified by id {
   o String gender
   o Double Contact_Number
   o String email
-  o Double balance
-}
-
-participant Bank identified by id {
-  o String id
-  o String name
-  o String branch_id
+  o String Acc_no
   o Double balance default = 0.0
+  o Double Aadhar
 }
 
   
@@ -28,26 +23,19 @@ participant Notary identified by id {
   o String address
   o Double balance default = 0.0
   o Integer pin
+  o String feedback optional 
 }
 
 asset RealEstate identified by id {
   o String id
+  o String landid
   o String address
   o Double Area
   o Double Coordinate_one
   o Double Coordinate_two
   o Double price
-  --> PrivateIndividual owner
-}
-
-asset Loan identified by id {
-   o String id
-   o Double amount
-   o Double interestRate
-   --> PrivateIndividual debtor
-  --> Bank bank
-  --> RealEstate realEstate
-   o Integer durationInMonths
+  o Boolean for_sale default = false
+  o String ownid
 }
   
 
@@ -55,14 +43,7 @@ transaction BuyingRealEstate {
   --> PrivateIndividual buyer
   --> PrivateIndividual seller
   --> RealEstate realEstate
-  --> Loan loan
   --> Notary notary
 }
   
-transaction ContractingLoan {
-  --> PrivateIndividual debtor
-  --> Bank bank
-  --> RealEstate realEstate
-  o Double interestRate
-  o Integer durationInMonths
-}
+
