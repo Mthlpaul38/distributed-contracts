@@ -31,7 +31,7 @@ function main(error){
  */
 function cancelsale(registry)
 {
-    var id='453453fdsfds';
+    var id="1001";
     var land;
     //console.log("succesful");
     return registry.get(id).then((land)=>

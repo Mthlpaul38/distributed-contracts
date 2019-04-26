@@ -19,7 +19,7 @@ function main(error){
         console.log('1. Received Registry: ', registry.id);
 
         // Utility method for adding the aircrafts
-       landdetails(registry);
+       changeprice(registry);
 
     }).catch((error)=>{
         console.log(error);
@@ -29,18 +29,17 @@ function main(error){
 /**
  * @param {*} registry This is of type AssetRegistry
  */
-function landdetails(registry)
+function changeprice(registry)
 {
-    var id='1001';
-    //console.log("succesful");
-    return registry.get(id).then((land)=>
+    var id='453453fdsfds';
+    console.log("succesful");
+    return registry.resolve(id).then((land)=>
     {
-        console.log(land.price);
-        console.log(land.ownid);
-            bnUtil.disconnect();
+        console.log(land);
+        bnUtil.disconnect();
         }).catch((error)=>{
             console.log(error);
             bnUtil.disconnect();
-            process.exit(1);
         });
+    
 }

@@ -23,27 +23,24 @@ participant Notary identified by id {
   o String address
   o Double balance default = 0.0
   o Integer pin
-  o String feedback optional 
 }
 
 asset RealEstate identified by id {
   o String id
-  o String landid
   o String address
   o Double Area
   o Double Coordinate_one
   o Double Coordinate_two
   o Double price
-  o Boolean for_sale default = false
   o String ownid
+  o String[] prevown optional
+  o Double[] prevprice optional
 }
-  
+
 
 transaction BuyingRealEstate {
-  --> PrivateIndividual buyer
-  --> PrivateIndividual seller
-  --> RealEstate realEstate
-  --> Notary notary
+  o String buyer
+  o String seller
 }
   
 

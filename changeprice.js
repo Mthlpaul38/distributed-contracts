@@ -31,8 +31,8 @@ function main(error){
  */
 function changeprice(registry)
 {
-    var id='453453fdsfds';
-    var land;
+    var id='1001';
+    var price=324234;
     //console.log("succesful");
     return registry.get(id).then((land)=>
     {

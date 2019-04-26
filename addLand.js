@@ -1,5 +1,10 @@
 'use strict';
+const readline = require('readline');
 
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout
+});
 const RegisrtyNamespace = 'org.acme.landregistry';
 const RealEstatetype = 'RealEstate';
 
@@ -35,27 +40,34 @@ function    addRealEstate(registry){
     const  bnDef = bnUtil.connection.getBusinessNetwork();
     const  factory = bnDef.getFactory();
     // Instance#1
-    var id="453453fdsfds";
-    var landid="44324";
-    var address="abcxxsd";
-    var area=4534;
-    var Coordinate_one=5433.4543;
-    var Coordinate_two=33445.7655;
-    var price=33432;
-    var ownid="ds332";
-    let    RealEstateResource = factory.newResource(RegisrtyNamespace,RealEstatetype,id);
-    RealEstateResource.setPropertyValue('landid',landid);
+    console.log("addLand2")
+    var id=process.argv[2];
+    var address=process.argv[3];
+    var area=process.argv[4];
+    var Coordinate_one=process.argv[5];
+    var Coordinate_two=process.argv[6];
+    var price=process.argv[7];
+    var ownid=process.argv[8];
+    /*var id="44324dfs42342";
+    var address="523424";
+    var area=432423;
+    var Coordinate_one=52525.54;
+    var Coordinate_two=423423.523;
+    var price=53453;
+    var ownid="4234234fds";*/
+        let    RealEstateResource = factory.newResource(RegisrtyNamespace,RealEstatetype,id);
     RealEstateResource.setPropertyValue('address',address);
-    RealEstateResource.setPropertyValue('Area',area);
-    RealEstateResource.setPropertyValue('Coordinate_one',Coordinate_one);
-    RealEstateResource.setPropertyValue('Coordinate_two',Coordinate_two);
-    RealEstateResource.setPropertyValue('price',price);
+    RealEstateResource.setPropertyValue('Area',parseFloat(area));
+    RealEstateResource.setPropertyValue('Coordinate_one',parseFloat(Coordinate_one));
+    RealEstateResource.setPropertyValue('Coordinate_two',parseFloat(Coordinate_two));
+    RealEstateResource.setPropertyValue('price',parseFloat(price));
     RealEstateResource.setPropertyValue('ownid',ownid);
     
     // 4. Add the Aircraft resource to the registry
     return registry.add(RealEstateResource).then(()=>{
         console.log('Added the Resources successfully!!!');
        bnUtil.disconnect();
+       process.exit();
     }).catch((error)=>{
         console.log(error);
         bnUtil.disconnect();
