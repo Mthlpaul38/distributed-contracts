@@ -33,14 +33,23 @@ asset RealEstate identified by id {
   o Double Coordinate_two
   o Double price
   o String ownid
-  o String[] prevown optional
-  o Double[] prevprice optional
 }
 
 
 transaction BuyingRealEstate {
   o String buyer
   o String seller
+  o String id
+  o String price
 }
+asset historian identified by id{
+  o String id
+  o String buyer
+  o String seller
+  o String land_id
+  o String price
+  o String time
+}
+  
   
 

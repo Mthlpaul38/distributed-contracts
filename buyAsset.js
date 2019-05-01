@@ -1,5 +1,11 @@
 'use strict';
+const readline = require('readline');
 
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout
+});
+const {spawn} = require('child_process');
 const RegisrtyNamespace = 'org.acme.landregistry';
 const RealEstatetype = 'RealEstate';
 
@@ -17,9 +23,7 @@ function main(error){
     // 2. Get the aircraft AssetRegistry
     return bnUtil.connection.getAssetRegistry(RegisrtyNamespace+'.'+RealEstatetype).then((registry)=>{
         console.log('1. Received Registry: ', registry.id);
-
-        // Utility method for adding the aircrafts
-       changeprice(registry);
+       buyAsset(registry);
 
     }).catch((error)=>{
         console.log(error);
@@ -29,39 +33,25 @@ function main(error){
 /**
  * @param {*} registry This is of type AssetRegistry
  */
-function changeprice(registry)
+function buyAsset(registry)
 {
-    var id='1001';
-    var buyer='1008';
-    //console.log("succesful");
+    var id=process.argv[2];
+    var buyer=process.argv[3];
     return registry.get(id).then((land)=>
     {
-        if (typeof land.prevown == 'undefined') {
-            land.prevown = new Array();
-           land.prevown[0] = land.ownid;
-          } 
-          else {
-            land.prevown.push(land.ownid);
-
-          }
-          if (typeof land.prevprice == 'undefined') {
-            land.prevprice = new Array();
-            land.prevprice[0] = land.price;
-          } 
-          else {
-            land.prevprice.push(land.price);
-          }
-        console.log(land.price);
-       // console.log(land.prevprice);
-       // land.prevown[1]="324efas";
-       // land.prevprice.push(land.price);
+        var price =land.price;
+        var seller=land.ownid;
         land.ownid=buyer;   
         console.log(land.ownid);
-        console.log(land.prevown);
-        console.log(land.prevprice);
-        return registry.update(land).then(()=>{
+        return registry.update(land).then(async ()=>{
             console.log("Update succesful");
             bnUtil.disconnect();
+           fprocess = await spawn('node',['/home/mathul/fabric-dev-servers/land-registry/historian.js',id,seller,buyer,price],{stdio: [process.stdin, process.stdout, process.stderr]}
+            )
+           fprocess.on('exit', function (codef) {
+                console.log("Historian updated");
+            });
+            process.exit(1);
         }).catch((error)=>{
             console.log(error);
             bnUtil.disconnect();

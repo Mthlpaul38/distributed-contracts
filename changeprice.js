@@ -1,5 +1,10 @@
 'use strict';
+const readline = require('readline');
 
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout
+});
 const RegisrtyNamespace = 'org.acme.landregistry';
 const RealEstatetype = 'RealEstate';
 
@@ -31,8 +36,8 @@ function main(error){
  */
 function changeprice(registry)
 {
-    var id='1001';
-    var price=324234;
+    var id=process.argv[3];
+    var price=process.argv[2];
     //console.log("succesful");
     return registry.get(id).then((land)=>
     {

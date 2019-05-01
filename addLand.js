@@ -55,7 +55,11 @@ function    addRealEstate(registry){
     var Coordinate_two=423423.523;
     var price=53453;
     var ownid="4234234fds";*/
-        let    RealEstateResource = factory.newResource(RegisrtyNamespace,RealEstatetype,id);
+    registry.exists(id).then((istrue)=>{
+        
+        if (!istrue){
+            console.log("NOT Exists");
+            let    RealEstateResource = factory.newResource(RegisrtyNamespace,RealEstatetype,id);
     RealEstateResource.setPropertyValue('address',address);
     RealEstateResource.setPropertyValue('Area',parseFloat(area));
     RealEstateResource.setPropertyValue('Coordinate_one',parseFloat(Coordinate_one));
@@ -72,4 +76,16 @@ function    addRealEstate(registry){
         console.log(error);
         bnUtil.disconnect();
     });
+        }
+    else{
+       console.log("exists");
+        bnUtil.disconnect();
+        process.exit(0);
+    }
+
+    }).catch((error)=>{
+        console.log(error);
+        bnUtil.disconnect();
+    });
+        
 }

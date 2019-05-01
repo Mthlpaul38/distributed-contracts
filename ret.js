@@ -5,10 +5,15 @@
 var MongoClient = require('mongodb').MongoClient;
 var url = "mongodb://localhost:27017/";
 const {spawn} = require('child_process');
+const readline = require('readline');
 
-var x = "1001"
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout
+});
+var x =process.argv[2];
 var query = ({
-    "land_id": x
+    "landid": x
 }); 
 
 //var deed_land_id;
@@ -18,9 +23,9 @@ var db
 var client
 try {
   client = await MongoClient.connect(url, { useNewUrlParser: true });
-  db = client.db('landdb');
+  db = client.db('property');
   console.log("succes");
-  return await db.collection('users').find(query).toArray();
+  return await db.collection('own_property').find(query).toArray();
 } finally {
   client.close();
 }
@@ -29,16 +34,16 @@ try {
 
 myFunc(query).then((res)=>{
 	console.log("succes2");
-	land_id = res[0].land_id;
-	land_adhar_number = res[0].adhar_number;
-	land_prev_owner_name = res[0].prev_owner_name;
-	land_coordinate_one = parseFloat(res[0].coordinate_one);
-	land_coordinate_two = parseFloat(res[0].coordinate_two);
-	land_area = parseFloat(res[0].area);
-	land_tax_pay_status = res[0].tax_pay_status;
-	land_liability_status = res[0].liability_status;
-	land_price = parseFloat(res[0].price);
-	land_address = res[0].address;
+	var land_id = res[0].landid;
+	var land_adhar_number = res[0].Aadhaarno;
+	var land_prev_owner_name = res[0].prevownname;
+	var land_coordinate_one = parseFloat(res[0].cordone);
+	var land_coordinate_two = parseFloat(res[0].cordtwo);
+	var land_area = parseFloat(res[0].area);
+	var land_tax_pay_status = res[0].taxstat;
+	var land_liability_status = res[0].liabstat;
+	var land_price = parseFloat(res[0].price);
+	var land_address = res[0].ownedaddress;
 
 	console.log("land id : ", land_id);
 	console.log("owner adhar number : ", land_adhar_number);
@@ -51,25 +56,27 @@ myFunc(query).then((res)=>{
 	console.log("land minimum price : ",land_price);
 	console.log("land address : ",land_address);
 	var flag=1;
-	if(land_tax_pay_status == 'paid'){
+	if(land_tax_pay_status == 'yes'){
 		console.log('Tax paid');
 	}
 	else{
 		console.log('Tax not paid');
 		flag=0;
+		process.exit(0);
 	}
 
-	if(land_liability_status == 'nil'){
+	if(land_liability_status == 'no'){
 		console.log('No liability');
 	}
 	else{
 		console.log('liability found');
 		flag=0;
+		process.exit(0);
 	}
 	if (flag==1)
 	{
 		//console.log("success");
-		cprocess =  spawn('node',['addLand.js',land_id,land_address,land_area,land_coordinate_one,land_coordinate_two,land_price,land_adhar_number],{stdio: [process.stdin, process.stdout, process.stderr]}
+		cprocess =  spawn('node',['/home/mathul/fabric-dev-servers/land-registry/addLand.js',land_id,land_address,land_area,land_coordinate_one,land_coordinate_two,land_price,land_adhar_number],{stdio: [process.stdin, process.stdout, process.stderr]}
 		)
 		/*cprocess.stdout.on('data', function (data) {
 			console.log('stdout: ' + data.toString());

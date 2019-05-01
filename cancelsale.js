@@ -1,5 +1,10 @@
 'use strict';
+const readline = require('readline');
 
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout
+});
 const RegisrtyNamespace = 'org.acme.landregistry';
 const RealEstatetype = 'RealEstate';
 
@@ -31,7 +36,7 @@ function main(error){
  */
 function cancelsale(registry)
 {
-    var id="1001";
+    var id=process.argv[2];
     var land;
     //console.log("succesful");
     return registry.get(id).then((land)=>
@@ -40,6 +45,7 @@ function cancelsale(registry)
         return registry.remove(land).then(()=>{
             console.log("Remove succesful");
             bnUtil.disconnect();
+            process.exit(0);
         }).catch((error)=>{
             console.log(error);
             bnUtil.disconnect();

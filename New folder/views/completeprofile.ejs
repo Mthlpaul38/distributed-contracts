@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<style>
+span{
+  font-size: 25px;
+  color: #ffff;
+  background-color: #2881DB;
+  padding: 10px;
+
+}
+div{
+  font-size: 25px;
+  color: #ffff;
+  background-color: #2881DB;
+  padding: 50px;
+}
+</style>
+<script src = "login.js" type="text/javascript"></script>
+<script>
+$(document).ready(function(){
+  $("#backtohome").click(function(){
+    window.location.href='/';
+  });
+});
+</script>
+<body>
+<span>Welcome : <%= profileData.name %> <br></span>
+<div>
+            Email:     <%= profileData.email %><br>
+            Phone:    <%= profileData.phone %><br>
+            Aadhaar:     <%= profileData.aadhaar %><br>
+</div>
+
+<div id="viewDiv" >
+  <button class="w3-btn w3-blue" id ="viewBtn">my property</button></p>
+</div>
+<div id="publicDiv">
+  <button class="w3-btn w3-blue" id ="publicBtn">public</button></p>
+</div>
+<div id="addDiv">
+  <button class="w3-btn w3-blue" id ="addBtn">add buyer</button></p>
+</div>
+<div id="payDiv">
+  <button class="w3-btn w3-blue" id ="pBtn">property that you want to buy</button></p>
+</div>
+
+<div>
+<button class="w3-btn w3-blue" id="backtohome">Back to Home</button></p>
+</body>
+</html>
