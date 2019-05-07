@@ -1,3 +1,11 @@
+/*const land = require('./getHist');
+async function lands()
+{
+console.log( "land-->"+await land.landdetails());
+//console.log(res);
+
+}
+lands();*/
 const BusinessNetworkConnection = require('composer-client').BusinessNetworkConnection;
 // Used as the card for all calls
 var cardName = "admin@land-registry";
@@ -32,4 +40,3 @@ function landdetails(registry)
         console.log(error);
         bnConnection.disconnect();
     });
-}

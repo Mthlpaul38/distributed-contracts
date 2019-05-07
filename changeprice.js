@@ -41,7 +41,7 @@ function changeprice(registry)
     //console.log("succesful");
     return registry.get(id).then((land)=>
     {
-        land.price=price;
+        land.price=parseFloat(price);
         console.log(land.price);
         return registry.update(land).then(()=>{
             console.log("Update succesful");

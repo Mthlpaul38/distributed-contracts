@@ -20,7 +20,7 @@ function main(error){
         process.exit(1);
     }
 
-    // 2. Get the aircraft AssetRegistry
+
     return bnUtil.connection.getAssetRegistry(RegisrtyNamespace+'.'+RealEstatetype).then((registry)=>{
         console.log('1. Received Registry: ', registry.id);
 
