@@ -3,7 +3,7 @@
     "composer": "^0.19.20"
   },
   "name": "land-registry",
-  "version": "0.0.20",
+  "version": "0.0.22",
   "description": "Land registraton",
   "scripts": {
     "prepublish": "mkdirp ./dist && composer archive create --sourceType dir --sourceName . -a ./dist/land-registry.bna",

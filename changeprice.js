@@ -46,6 +46,7 @@ function changeprice(registry)
         return registry.update(land).then(()=>{
             console.log("Update succesful");
             bnUtil.disconnect();
+            process.exit(0);
         }).catch((error)=>{
             console.log(error);
             bnUtil.disconnect();

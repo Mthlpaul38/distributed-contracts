@@ -37,21 +37,24 @@ function buyAsset(registry)
 {
     var id=process.argv[2];
     var buyer=process.argv[3];
+    var buyerid=process.argv[4];
     return registry.get(id).then((land)=>
     {
         var price =land.price;
-        var seller=land.ownid;
+        var sellerid=land.ownid;
+        var seller=land.ownname;
         land.ownid=buyer;   
         console.log(land.ownid);
-        return registry.update(land).then(async ()=>{
+        return registry.update(land).then( ()=>{
             console.log("Update succesful");
             bnUtil.disconnect();
-           fprocess = await spawn('node',['/home/mathul/fabric-dev-servers/land-registry/historian.js',id,seller,buyer,price],{stdio: [process.stdin, process.stdout, process.stderr]}
+           fprocess =  spawn('node',['/home/mathul/fabric-dev-servers/land-registry/historian.js',id,seller,buyer,price,buyerid,sellerid],{stdio: [process.stdin, process.stdout, process.stderr]}
             )
            fprocess.on('exit', function (codef) {
                 console.log("Historian updated");
+                process.exit(0);
             });
-            process.exit(1);
+            
         }).catch((error)=>{
             console.log(error);
             bnUtil.disconnect();

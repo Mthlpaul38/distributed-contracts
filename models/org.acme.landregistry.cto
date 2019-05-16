@@ -33,6 +33,7 @@ asset RealEstate identified by id {
   o Double Coordinate_two
   o Double price
   o String ownid
+  o String ownname
 }
 
 
@@ -49,6 +50,8 @@ asset historian identified by id{
   o String land_id
   o String price
   o String time
+  o String sellerid
+  o String buyerid
 }
   
   

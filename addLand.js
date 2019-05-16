@@ -48,6 +48,7 @@ function    addRealEstate(registry){
     var Coordinate_two=process.argv[6];
     var price=process.argv[7];
     var ownid=process.argv[8];
+    var ownname=process.argv[9];
     /*var id="44324dfs42342";
     var address="523424";
     var area=432423;
@@ -66,12 +67,11 @@ function    addRealEstate(registry){
     RealEstateResource.setPropertyValue('Coordinate_two',parseFloat(Coordinate_two));
     RealEstateResource.setPropertyValue('price',parseFloat(price));
     RealEstateResource.setPropertyValue('ownid',ownid);
-    
-    // 4. Add the Aircraft resource to the registry
+    RealEstateResource.setPropertyValue('ownname',ownname);
     return registry.add(RealEstateResource).then(()=>{
         console.log('Added the Resources successfully!!!');
        bnUtil.disconnect();
-       process.exit();
+       process.exit(0);
     }).catch((error)=>{
         console.log(error);
         bnUtil.disconnect();

@@ -48,19 +48,28 @@ function    addRealEstate(registry){
     var land_id=process.argv[2];
     var time=new Date().toJSON();
     var id=land_id+time;
+    var buyerid=process.argv[5];
+    var sellerid=process.argv[6];
     var price=process.argv[5];
-    
+    console.log(buyer);
+    console.log(seller);
+    console.log(land_id); 
+    console.log(buyerid);
+    console.log(sellerid); 
         let    RealEstateResource = factory.newResource(RegisrtyNamespace,RealEstatetype,id);
     RealEstateResource.setPropertyValue('buyer',buyer);
     RealEstateResource.setPropertyValue('seller',seller); 
     RealEstateResource.setPropertyValue('price',price);
     RealEstateResource.setPropertyValue('land_id',land_id);
+    RealEstateResource.setPropertyValue('buyerid',buyerid);
+    RealEstateResource.setPropertyValue('sellerid',sellerid);
     RealEstateResource.setPropertyValue('time',new Date().toJSON());
     // 4. Add the Aircraft resource to the registry
     return registry.add(RealEstateResource).then(()=>{
         console.log('Added the Historian successfully!!!');
-       // process.exit(0);s
         bnUtil.disconnect();
+        process.exit(0);
+        
     }).catch((error)=>{
         console.log(error);
         bnUtil.disconnect();
