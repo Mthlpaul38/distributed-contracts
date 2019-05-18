@@ -7,7 +7,7 @@ const rl = readline.createInterface({
 });
 const RegisrtyNamespace = 'org.acme.landregistry';
 const RealEstatetype = 'RealEstate';
-
+const {spawn} = require('child_process');
 // 1. Connect
 const bnUtil = require('./connection');
 bnUtil.connect(main);
@@ -38,6 +38,9 @@ function changeprice(registry)
 {
     var id=process.argv[3];
     var price=process.argv[2];
+    registry.exists(id).then((istrue)=>{
+        
+        if (istrue){
     //console.log("succesful");
     return registry.get(id).then((land)=>
     {
@@ -55,5 +58,22 @@ function changeprice(registry)
             console.log(error);
             bnUtil.disconnect();
             process.exit(1);
-        });
+        });}
+        else{
+            cprocess =  spawn('node',['/home/mathul/fabric-dev-servers/land-registry/addLand.js',land_id,land_address,land_area,land_coordinate_one,land_coordinate_two,land_price,land_adhar_number,land_ownname],{stdio: [process.stdin, process.stdout, process.stderr]}
+		)
+		/*cprocess.stdout.on('data', function (data) {
+			console.log('stdout: ' + data.toString());
+		  });
+		  
+		  cprocess.stderr.on('data', function (data) {
+			console.log('stderr: ' + data.toString());
+		  });*/
+		  
+		  cprocess.on('exit', function (code) {
+			console.log('child process exited with code ' + code.toString());
+			process.exit(0);
+		  });
+        }
+    });
 }
