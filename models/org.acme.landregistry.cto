@@ -4,26 +4,6 @@
 
 namespace org.acme.landregistry
 
-participant PrivateIndividual identified by id {
-  o String id
-  o String name
-  o String address
-  o String gender
-  o Double Contact_Number
-  o String email
-  o String Acc_no
-  o Double balance default = 0.0
-  o Double Aadhar
-}
-
-  
-participant Notary identified by id {
-  o String id
-  o String name
-  o String address
-  o Double balance default = 0.0
-  o Integer pin
-}
 
 asset RealEstate identified by id {
   o String id

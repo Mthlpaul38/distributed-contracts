@@ -60,20 +60,14 @@ function changeprice(registry)
             process.exit(1);
         });}
         else{
-            cprocess =  spawn('node',['/home/mathul/fabric-dev-servers/land-registry/addLand.js',land_id,land_address,land_area,land_coordinate_one,land_coordinate_two,land_price,land_adhar_number,land_ownname],{stdio: [process.stdin, process.stdout, process.stderr]}
-		)
-		/*cprocess.stdout.on('data', function (data) {
-			console.log('stdout: ' + data.toString());
-		  });
+           // cprocess =  spawn('node',['/home/mathul/fabric-dev-servers/land-registry/addLand.js',land_id,land_address,land_area,land_coordinate_one,land_coordinate_two,land_price,land_adhar_number,land_ownname],{stdio: [process.stdin, process.stdout, process.stderr]}
+		//)
+		
 		  
-		  cprocess.stderr.on('data', function (data) {
-			console.log('stderr: ' + data.toString());
-		  });*/
-		  
-		  cprocess.on('exit', function (code) {
-			console.log('child process exited with code ' + code.toString());
+		//  cprocess.on('exit', function (code) {
+			//console.log('child process exited with code ' + code.toString());
 			process.exit(0);
-		  });
+		 // });
         }
     });
 }

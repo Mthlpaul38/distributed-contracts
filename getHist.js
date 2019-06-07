@@ -5,7 +5,7 @@ module.exports={
         const BusinessNetworkConnection = require('composer-client').BusinessNetworkConnection;
         var cardName = "admin@land-registry";
         const bnConnection = new BusinessNetworkConnection();
-        console.log("2");
+       // console.log("2");
     
         await bnConnection.connect(cardName).then(async function()
         
@@ -43,7 +43,7 @@ module.exports={
             }
      var statement='SELECT org.acme.landregistry.historian';
     var qry= await bnConnection.buildQuery(statement);
-    console.log("3");
+    //console.log("3");
     return bnConnection.query(qry).then((result)=>{
        if (isEmpty(result)){
             console.log("empty");

@@ -19,7 +19,6 @@ function main(error){
         process.exit(1);
     }
 
-    // 2. Get the aircraft AssetRegistry
     return bnUtil.connection.getAssetRegistry(RegisrtyNamespace+'.'+RealEstatetype).then((registry)=>{
         console.log('1. Received Registry: ', registry.id);
 
@@ -36,7 +35,6 @@ function main(error){
  * @param {*} registry This is of type AssetRegistry
  */
 function    addRealEstate(registry){
-    // 3. This Array will hold the instances of aircraft resource
     const  bnDef = bnUtil.connection.getBusinessNetwork();
     const  factory = bnDef.getFactory();
     // Instance#1

@@ -33,6 +33,7 @@ function main(error){
 /**
  * @param {*} registry This is of type AssetRegistry
  */
+
 function buyAsset(registry)
 {
     var id=process.argv[2];
@@ -64,4 +65,27 @@ function buyAsset(registry)
             bnUtil.disconnect();
             process.exit(1);
         });
+}
+/**
+ * Buying Real Estate
+ * @param {org.acme.landregistry.BuyingRealEstate} trade
+ * @transaction
+ */
+function BuyingRealEstate(trade)
+{
+    var id=process.argv[2];
+    var buyer=process.argv[3];
+    return registry.get(id).then((land)=>
+    {
+        var price=land.price;
+        var seller=land.ownname;
+        trade.buyer=buyer;
+        trade.id=id;
+        trade.seller=seller; 
+        }).catch((error)=>{
+            console.log(error);
+            bnUtil.disconnect();
+            process.exit(1);
+        });    
+    
 }
